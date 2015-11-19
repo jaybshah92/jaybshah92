@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Find My Way </title>
+<link rel="stylesheet" href="main.css">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<p id='lat' name='lat' hidden ></p>
+<p id='lng' name='lng' hidden ></p>
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script>
+var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+var labelIndex = 0;
+var marker;
+
+function initialize() {
+    var mapCanvas = document.getElementById('map');
+    var mapOptions = {
+        center: new google.maps.LatLng(33.7550,-84.3900),
+        zoom: 12,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    var map = new google.maps.Map(mapCanvas,mapOptions);
+    var myLatLng = {lat: 33.7550, lng: -84.3900};
+    marker = addMarker(myLatLng,map);
+    marker.addListener('click', function() {
+                       infowindow.open(map, marker);
+                       });
+
+
+    google.maps.event.addListener(map, 'click', function(event) {
+                                marker = addMarker(event.latLng, map);
+                                marker.addListener('click', function() {
+                                                     infowindow.open(map, marker);
+                                                     });
+                                  var position = {"latitude":event.latLng.lat(),"longitude":document.event.latLng.lng()};
+                                  
+                                  document.getElementById('lat').innerHTML = event.latLng.lat();
+                                  document.getElementById('lng').innerHTML = event.latLng.lng();    
+                                  
+                                  });
+                                  
+    
+    
+
+  var contentString ='<h1 id="firstHeading" class="firstHeading">Information about the place</h1>';
+  
+  var infowindow = new google.maps.InfoWindow({
+                                              content:contentString
+                                              });
+ 
+  
+  
+                                                                                         
+}
+function addMarker(location, map) {
+// Add the marker at the clicked location, and add the next-available label
+// from the array of alphabetical characters.
+    marker = new google.maps.Marker({
+                                    position: location,
+                                    label: labels[labelIndex++ % labels.length],
+                                    map: map
+                                    });
+                                    return marker;
+}
+
+google.maps.event.addDomListener(window,'load',initialize);
+</script>
+<style type="text/css">
+* { padding: 0; margin: 0;}
+body { font-family: sans-serif; }
+a { text-decoration: none;color: #000; padding-left:5px; }
+nav li { list-style-type: none;}
+
+nav { width: 100%;}
+nav a {
+    display:block;
+    padding: 15px 0;
+    color: #F0EADC;
+    vertical-align:middle;
+    text-align:center-left;
+    border-bottom: 1px solid #CCC
+}
+nav li:last-child a{ border-top: 2px solid #CCC;border-bottom: none; }
+nav a:hover { background: #CCC; color:  #FFF; }
+#add_event {
+background-color:#B0C4DE;
+border: none;
+cursor:pointer;
+color:#FFF;
+padding: 5px 5px;
+position: fixed;
+bottom: 0px;
+right: 0px;
+}
+#add_event:hover {
+border:none;
+box-shadow: 0px 0px 1px #;
+}
+#account {
+position:fixed;
+top: 0px;
+right: 0px;
+background-color:#B0C4DE;
+border:none;
+padding: 5px 5px;
+}
+</style>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    
+    </head>
+<body class="menu">
+<header>
+<a href="#" class="menu-toggle" style="font-size:16px">&#9776;</a>
+<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="account"><i class="material-icons" style="font-size:24px">account_circle</i>
+<span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right">
+<li><a href="#">My Account</a></li>
+<li><a href="#">Settings</a></li>
+<li><a href="#">Logout</a></li>
+</ul>
+<button type="button" onclick="alert('Add Event')" style="float:right;" id = "add_event" name = "Add Event"><i class="material-icons" style="font-size:36px">add_box</i></button>
+<nav class="menu-side">
+<ul>
+<li><a href="#"><i class="material-icons" style="font-size:36px">book</i> My Trails</a></li>
+<li><a href="#"><i class="material-icons" style="font-size:36px">people</i> Following</a></li>
+<li><a href="#"><i class="material-icons" style="font-size:36px">map</i> Explore</a></li>
+<li><a href="#"><i class="material-icons" style="font-size:36px">local_play</i> Popular</a></li>
+</ul>
+
+</nav>
+</header>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+(function() {
+var body = $('body');
+$('.menu-toggle').bind('click',function() {
+                body.toggleClass('menu-open');
+                return false;
+                });
+})();
+</script>
+<div class ="map" id="map"></div>
+
+
+
+</body>
+</html>
