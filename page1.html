@@ -14,7 +14,7 @@
         /*position: fixed;
         overflow: hidden;*/
         z-index: 1;
-        height: 98vh;
+        height: 100vh;
         width: 100%;
       }
       .controls {
@@ -55,14 +55,15 @@
         font-weight: 300;
       }
       #account {
-                position:fixed;
+                position:relative;
                 top: 0px;
-                right: 5px;
+                right: 0px;
                 background-color:#7f7f7f;
                 border:none;
-                padding: 5px 5px;
+                /*padding: 5px 5px;*/
                 float:right;
                 color:white;
+                z-index: 999;
             }
     </style>
     <style>
@@ -147,6 +148,7 @@
 // This example adds a search box to a map, using the Google Place Autocomplete
 // feature. People can enter geographical searches. The search box will return a
 // pick list containing a mix of places and predicted search terms.
+
 function initAutocomplete() {
   var map = new google.maps.Map(document.getElementById("map"), {
     center: {lat: -33.8688, lng: 151.2195},
@@ -154,20 +156,22 @@ function initAutocomplete() {
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
   var infoWindow = new google.maps.InfoWindow({map: map});
+  
   // Create the search box and link it to the UI element.
   var input = document.getElementById("pac-input");
   var searchBox = new google.maps.places.SearchBox(input);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
-      infoWindow.setPosition(pos); 
-      infoWindow.setContent('Location found.');
+//      infoWindow.setPosition(pos); 
+//      infoWindow.setContent('Location found.');
       infoWindow.close(); 
-      var marker = new google.maps.Marker({position:pos,map:map,title:"You are here!"});
+//      var marker = new google.maps.Marker({position:pos,map:map,title:"You are here!"});
       map.setCenter(pos);
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
@@ -176,10 +180,36 @@ if (navigator.geolocation) {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
   } 
+
+  // DISPLAY USER TRAILS????
+  // Read JSON object (Existing trails/precreated user trail) and parse it to create appropriate markers 
+  var bounds = new google.maps.LatLngBounds();
+  var existing_markers = [];
+  $(document).ready(function() {
+    $.getJSON("foo.txt", function(json1) {
+      $.each(json1, function(key, data) {
+        var latLng = new google.maps.LatLng(data.lat, data.lng); 
+        //Creating a marker and putting it on the map
+        existing_markers.push(new google.maps.Marker({
+          position: latLng,
+          map: map,
+          title: data.title
+        }));
+        for(i=0;i<existing_markers.length;i++) 
+        {
+          bounds.extend(existing_markers[i].getPosition());
+        }
+      });
+    });
+  });
+  map.fitBounds(bounds);
+
+
   // Bias the SearchBox results towards current map's viewport.
   map.addListener('bounds_changed', function() {
     searchBox.setBounds(map.getBounds());
   });
+
   var markers = [];
   // [START region_getplaces]
   // Listen for the event fired when the user selects a prediction and retrieve
@@ -189,13 +219,15 @@ if (navigator.geolocation) {
     if (places.length == 0) {
       return;
     }
+
     // Clear out the old markers.
-    markers.forEach(function(marker) {
+    existing_markers.forEach(function(marker) {
       marker.setMap(null);
     });
-    markers = [];
+    existing_markers = [];
+
     // For each place, get the icon, name and location.
-    var bounds = new google.maps.LatLngBounds();
+    var str = null;
     places.forEach(function(place) {
       
       // Create a marker for each place.
@@ -204,17 +236,30 @@ if (navigator.geolocation) {
         title: place.name,
         position: place.geometry.location
       }));
+
+      //create json object for each marker
+      if (str == null)
+        str = str +'{"title": "'+place.name+'","position": "'+place.geometry.location+'"}';  
+      else
+        str = str +','+'{"title": "'+place.name+'","position": "'+place.geometry.location+'"}';
+
+      //set infowindow data
       google.maps.event.addListener(marker, 'click', function() {
         infowindow.setContent(place.name);
         infowindow.open(map, this);
       });
-      if (place.geometry.viewport) {
-        // Only geocodes have viewport.
-        bounds.union(place.geometry.viewport);
-      } else {
-        bounds.extend(place.geometry.location);
+
+      //extending bounds for each marker seperately
+      for(i=0;i<markers.length;i++) {
+        bounds.extend(markers[i].getPosition());
       }
+      map.fitBounds(bounds);
     });
+    
+    //stringyfy to proper JSON formaat
+    json = "["+str+"];";
+    
+    //Fit bounds -- Resize map zoom to include all markers
     map.fitBounds(bounds);
   });
   // [END region_getplaces]
