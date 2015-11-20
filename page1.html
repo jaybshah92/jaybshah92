@@ -162,6 +162,8 @@ function initAutocomplete() {
   var searchBox = new google.maps.places.SearchBox(input);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
+  var markers = [];
+
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {
@@ -171,7 +173,7 @@ if (navigator.geolocation) {
 //      infoWindow.setPosition(pos); 
 //      infoWindow.setContent('Location found.');
       infoWindow.close(); 
-      var marker = new google.maps.Marker({position:pos,map:map,title:"You are here!"});
+      markers.push(new google.maps.Marker({position:pos,map:map,title:"You are here!"}));
       map.setCenter(pos);
       map.setZoom(13);
     }, function() {
@@ -212,7 +214,6 @@ if (navigator.geolocation) {
     searchBox.setBounds(map.getBounds());
   });
 
-  var markers = [];
   // [START region_getplaces]
   // Listen for the event fired when the user selects a prediction and retrieve
   // more details for that place.
