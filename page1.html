@@ -246,7 +246,7 @@ if (navigator.geolocation) {
         str = str +','+'{"title": "'+place.name+'","position": "'+place.geometry.location+'"}';
 
       //set infowindow data
-      google.maps.event.addListener(marker, 'click', function() {
+      google.maps.event.addListener(markers, 'click', function() {
         infowindow.setContent(place.name);
         infowindow.open(map, this);
       });
