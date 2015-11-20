@@ -171,8 +171,9 @@ if (navigator.geolocation) {
 //      infoWindow.setPosition(pos); 
 //      infoWindow.setContent('Location found.');
       infoWindow.close(); 
-//      var marker = new google.maps.Marker({position:pos,map:map,title:"You are here!"});
+      var marker = new google.maps.Marker({position:pos,map:map,title:"You are here!"});
       map.setCenter(pos);
+      map.setZoom(13);
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
@@ -184,6 +185,7 @@ if (navigator.geolocation) {
   // DISPLAY USER TRAILS????
   // Read JSON object (Existing trails/precreated user trail) and parse it to create appropriate markers 
   var bounds = new google.maps.LatLngBounds();
+  var new_bounds = new google.maps.LatLngBounds();
   var existing_markers = [];
   $(document).ready(function() {
     $.getJSON("foo.txt", function(json1) {
@@ -197,12 +199,12 @@ if (navigator.geolocation) {
         }));
         for(i=0;i<existing_markers.length;i++) 
         {
-          bounds.extend(existing_markers[i].getPosition());
+          new_bounds.extend(existing_markers[i].getPosition());
         }
       });
     });
   });
-  map.fitBounds(bounds);
+  map.fitBounds(new_bounds);
 
 
   // Bias the SearchBox results towards current map's viewport.
