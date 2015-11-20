@@ -241,7 +241,7 @@ if (navigator.geolocation) {
       }));
 
       //create json object for each marker
-      if (str == null)
+      if (str == null && place.name != "You are here!")
         str = str +'{"title": "'+place.name+'","position": "'+place.geometry.location+'"}';  
       else
         str = str +','+'{"title": "'+place.name+'","position": "'+place.geometry.location+'"}';
