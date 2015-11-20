@@ -54,6 +54,14 @@
         font-size: 13px;
         font-weight: 300;
       }
+      account {
+                position:fixed;
+                top: 0px;
+                right: 0px;
+                background-color:#808080;
+                border:none;
+                padding: 5px 5px;
+            }
     </style>
     <style>
       #target {
@@ -102,7 +110,8 @@
         <div id="page">
           <div class="header">
             <a href="#menu"></a>
-            <button style="font-size:24px; float: right; background-color: #8080; border:none "><i class="material-icons">account_circle</i><span class="caret"></span></button>
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="account"><i class="material-icons" style="font-size:24px">account_circle</i>
+                <span class="caret"></span></button>
             Traveller's Trails Web App
           </div>
         <nav id="menu">
