@@ -240,7 +240,12 @@ if (navigator.geolocation) {
         strokeWeight: 2
       });
    flightPath.setMap(map);
+   map.addListener('click',addLatLng);
   // [END region_getplaces]
+}
+function addLatLng(event){
+  var path = flightPath.getPath();
+  path.push(event.latLng);
 }
 function handleLocationError(browserHasGeolocation, pos) {
   infoWindow.setPosition(pos);
