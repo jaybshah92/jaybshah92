@@ -223,7 +223,7 @@ if (navigator.geolocation) {
         strokeOpacity: 1.0,
         strokeWeight: 2
       });
-      flightPath.setMap(map);
+      //flightPath.setMap(map);
       google.maps.event.addListener(marker, 'click', function() {
         infowindow.setContent(place.name);
         infowindow.open(map, this);
@@ -238,6 +238,7 @@ if (navigator.geolocation) {
     });
     map.fitBounds(bounds);
   });
+   flightPath.setMap(map);
   // [END region_getplaces]
 }
 function handleLocationError(browserHasGeolocation, pos) {
