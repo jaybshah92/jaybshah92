@@ -199,18 +199,31 @@ if (navigator.geolocation) {
       marker.setMap(null);
     });
     markers = [];
-
+    var lat;
+    var lng;
+    var flightPlanCoordinates = [];
     // For each place, get the icon, name and location.
     var bounds = new google.maps.LatLngBounds();
     places.forEach(function(place) {
       
       // Create a marker for each place.
-      markers.push(new google.maps.Marker({
+      var mark = new google.maps.Marker({
         map: map,
         title: place.name,
         position: place.geometry.location
-      }));
-
+      });
+      markers.push(mark);
+      lat = this.mark.lat();
+      lng = this.mark.lng();
+      flightPlanCoordinates.push({lat,lng});
+      var flightPath = new google.maps.Polyline({
+        path: flightPlanCoordinates,
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+      });
+      flightPath.setMap(map);
       google.maps.event.addListener(marker, 'click', function() {
         infowindow.setContent(place.name);
         infowindow.open(map, this);
