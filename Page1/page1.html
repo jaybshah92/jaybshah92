@@ -216,13 +216,7 @@ if (navigator.geolocation) {
       lat = this.mark.lat();
       lng = this.mark.lng();
       flightPlanCoordinates.push(new google.maps.LatLng(lat,lng));
-      var flightPath = new google.maps.Polyline({
-        path: flightPlanCoordinates,
-        geodesic: true,
-        strokeColor: '#FF0000',
-        strokeOpacity: 1.0,
-        strokeWeight: 2
-      });
+      
       //flightPath.setMap(map);
       google.maps.event.addListener(marker, 'click', function() {
         infowindow.setContent(place.name);
@@ -238,6 +232,13 @@ if (navigator.geolocation) {
     });
     map.fitBounds(bounds);
   });
+  var flightPath = new google.maps.Polyline({
+        path: flightPlanCoordinates,
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+      });
    flightPath.setMap(map);
   // [END region_getplaces]
 }
