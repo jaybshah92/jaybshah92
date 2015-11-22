@@ -215,7 +215,7 @@ if (navigator.geolocation) {
       markers.push(mark);
       lat = this.mark.lat();
       lng = this.mark.lng();
-      flightPlanCoordinates.push({lat,lng});
+      flightPlanCoordinates.push(new google.maps.LatLng(lat,lng));
       var flightPath = new google.maps.Polyline({
         path: flightPlanCoordinates,
         geodesic: true,
