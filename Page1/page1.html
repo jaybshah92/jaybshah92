@@ -199,8 +199,6 @@ if (navigator.geolocation) {
       marker.setMap(null);
     });
     markers = [];
-    var lat;
-    var lng;
     var flightPlanCoordinates = [];
     // For each place, get the icon, name and location.
     var bounds = new google.maps.LatLngBounds();
@@ -214,7 +212,6 @@ if (navigator.geolocation) {
       });
       markers.push(mark);
       
-      //flightPath.setMap(map);
       google.maps.event.addListener(marker, 'click', function() {
         var lat = this.position.lat();
         var long = this.position.lng();
@@ -225,7 +222,7 @@ if (navigator.geolocation) {
         strokeColor: '#FF0000',
         strokeOpacity: 1.0,
         strokeWeight: 2
-      });
+        });
         infowindow.setContent(place.name);
         infowindow.open(map, this);
         flightPath.setMap(map);
