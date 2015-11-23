@@ -216,11 +216,18 @@ if (navigator.geolocation) {
       lat = this.mark.lat();
       lng = this.mark.lng();
       flightPlanCoordinates.push(new google.maps.LatLng(lat,lng));
-      
+      var flightPath = new google.maps.Polyline({
+        path:flightPlanCoordinates,
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+      });
       //flightPath.setMap(map);
       google.maps.event.addListener(marker, 'click', function() {
         infowindow.setContent(place.name);
         infowindow.open(map, this);
+        flightPath.setMap(map);
       });
 
       if (place.geometry.viewport) {
@@ -232,25 +239,11 @@ if (navigator.geolocation) {
     });
     map.fitBounds(bounds);
   });
-  var flightPath = new google.maps.Polyline({
-        geodesic: true,
-        strokeColor: '#FF0000',
-        strokeOpacity: 1.0,
-        strokeWeight: 2
-      });
-   flightPath.setMap(map);
-   map.addListener('click',addLatLng);
+ 
+   
   // [END region_getplaces]
 }
-function addLatLng(event){
-  var path = flightPath.getPath();
-  path.push(event.latLng);
-  var marker = new google.maps.Marker({
-    position: event.lanLng,
-    title: '#' + path.getLength(),
-    map:map
-  });
-}
+
 function handleLocationError(browserHasGeolocation, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(browserHasGeolocation ?'Error: The Geolocation service failed.' :'Error: Your browser doesn\'t support geolocation.');
