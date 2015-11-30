@@ -265,6 +265,9 @@ if (navigator.geolocation) {
         bounds.extend(markers[i].getPosition());
       }
       map.fitBounds(bounds);
+      var polylineOptions = {path:markers};
+      var polyline = new google.maps.Polyline(polylineOptions);
+      polyline.setMap(map);
     });
     
     //stringyfy to proper JSON formaat
