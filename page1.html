@@ -257,7 +257,7 @@ if (navigator.geolocation) {
         str = str +','+'{"title": "'+place.name+'","position": "'+place.geometry.location+'"}';
 
       //set infowindow data
-      var request = { reference: place.reference };
+      var request = { placeId: place.place_id };
         service.getDetails(request, function(details, status) {
           google.maps.event.addListener(markers, 'click', function() {
             infowindow.setContent(details.name + "<br />" + details.formatted_address +"<br />" + details.website + "<br />" + details.rating + "<br />" + details.formatted_phone_number);
