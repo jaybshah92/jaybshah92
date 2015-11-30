@@ -122,6 +122,28 @@
         });
       });
     </script>
+    <script type="text/javascript">
+      $(function() {
+        $('nav#account_dd').mmenu({
+          extensions  : [ 'effect-slide-menu', 'pageshadow' ],
+          searchfield : false,
+          counters  : false,
+          navbar    : {
+            title   : 'Account settings'
+          },
+          navbars   : [
+            {
+              position  : 'top',
+              content   : [
+                'prev',
+                'title',
+                'close'
+              ]
+            }
+          ]
+        });
+      });
+    </script>
   </head>
   
   <body>
@@ -130,12 +152,13 @@
             Traveller's Guide
            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="account"><i class="material-icons" style="font-size:24px">account_circle</i>
         <span class="caret"></span></button>
-        <ul class="dropdown-menu dropdown-menu-right" id="account_dd">
+        <nav id="account_dd">
+        <ul>
         <li><a href="#">My Account</a></li>
         <li><a href="#">Settings</a></li>
         <li><a href="#">Logout</a></li>
-        </ul> 
-
+        </ul>
+        </nav> 
         <nav id="menu">
         <ul>
           <li><a href="http://localhost/mainpage/mainpage.html">My Trails</a></li>
