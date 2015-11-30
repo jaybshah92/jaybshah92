@@ -284,11 +284,11 @@ if (navigator.geolocation) {
     document.getElementById('content').appendChild(a);
     */
     //Fit bounds -- Resize map zoom to include all markers
-    var polylineOptions = {path:destinations};
-    var polyline = new google.maps.Polyline({polylineOptions,geodesic: true,
+    var polylineOptions = {path:destinations,,geodesic: true,
         strokeColor: '#FF0000',
         strokeOpacity: 1.0,
-        strokeWeight: 2});
+        strokeWeight: 2};
+    var polyline = new google.maps.Polyline(polylineOptions);
     polyline.setMap(map);
 
     map.fitBounds(bounds);
