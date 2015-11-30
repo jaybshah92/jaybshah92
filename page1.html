@@ -268,6 +268,9 @@ if (navigator.geolocation) {
     });
     
     //stringyfy to proper JSON formaat
+    json = "["+str+"];";
+    
+    /*
     var blob = new Blob([str], {type: "application/json"});
     var url  = URL.createObjectURL(blob);
 
@@ -277,7 +280,7 @@ if (navigator.geolocation) {
     a.textContent = "Download backup.json";
 
     document.getElementById('content').appendChild(a);
-    
+    */
     //Fit bounds -- Resize map zoom to include all markers
     map.fitBounds(bounds);
   });
