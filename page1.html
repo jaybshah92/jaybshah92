@@ -263,9 +263,10 @@ if (navigator.geolocation) {
       //extending bounds for each marker seperately
       for(i=0;i<markers.length;i++) {
         bounds.extend(markers[i].getPosition());
+        destinations.push( new google.maps.LatLng(markers[i].getPosition()));
       }
       map.fitBounds(bounds);
-      var polylineOptions = {path:markers};
+      var polylineOptions = {path:destinations};
       var polyline = new google.maps.Polyline(polylineOptions);
       polyline.setMap(map);
     });
