@@ -258,7 +258,7 @@ if (navigator.geolocation) {
         str = str +','+'{"title": "'+place.name+'","position": "'+place.geometry.location+'"}';
 
       service.getDetails({
-        placeId: place.place_id;
+        placeId: place.place_id
       }, function(place, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           google.maps.event.addListener(marker, 'click', function() {
@@ -269,13 +269,13 @@ if (navigator.geolocation) {
       });
 
       //set infowindow data
-      var request = { placeId: place.place_id };
-        service.getDetails(request, function(details, status) {
-          google.maps.event.addListener(markers, 'click', function() {
-            infowindow.setContent(details.name + "<br />" + details.formatted_address +"<br />" + details.website + "<br />" + details.rating + "<br />" + details.formatted_phone_number);
-            infowindow.open(map, this);
-          });
-        });
+      // var request = { placeId: place.place_id };
+      //   service.getDetails(request, function(details, status) {
+      //     google.maps.event.addListener(markers, 'click', function() {
+      //       infowindow.setContent(details.name + "<br />" + details.formatted_address +"<br />" + details.website + "<br />" + details.rating + "<br />" + details.formatted_phone_number);
+      //       infowindow.open(map, this);
+      //     });
+      //   });
       
       // google.maps.event.addListener(markers, 'click', function() {
       //   infowindow.setContent(place.name+"\n"+place.formatted_address+"\n"+place.formatted_phone_number+"\n"+place.period.open.time);
