@@ -267,9 +267,6 @@ if (navigator.geolocation) {
         destinations.push(place.geometry.location);
       }
       map.fitBounds(bounds);
-      var polylineOptions = {path:destinations};
-      var polyline = new google.maps.Polyline(polylineOptions);
-      polyline.setMap(map);
     });
     
     //stringyfy to proper JSON formaat
@@ -287,6 +284,10 @@ if (navigator.geolocation) {
     document.getElementById('content').appendChild(a);
     */
     //Fit bounds -- Resize map zoom to include all markers
+    var polylineOptions = {path:destinations};
+    var polyline = new google.maps.Polyline(polylineOptions);
+    polyline.setMap(map);
+
     map.fitBounds(bounds);
   });
   // [END region_getplaces]
