@@ -164,8 +164,7 @@ function initAutocomplete() {
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
   var infoWindow = new google.maps.InfoWindow({map: map});
-  service = new google.maps.places.PlacesService(map);
-  
+   
   // Create the search box and link it to the UI element.
   var input = document.getElementById("pac-input");
   var searchBox = new google.maps.places.SearchBox(input);
@@ -231,6 +230,8 @@ if (navigator.geolocation) {
     if (places.length == 0) {
       return;
     }
+    var infowindow1 = new google.maps.InfoWindow();
+    var service = new google.maps.places.PlacesService(map);
 
     // Clear out the old markers.
     existing_markers.forEach(function(marker) {
@@ -255,6 +256,17 @@ if (navigator.geolocation) {
         str = '{"title": "'+place.name+'","position": "'+place.geometry.location+'"}';  
       else
         str = str +','+'{"title": "'+place.name+'","position": "'+place.geometry.location+'"}';
+
+      service.getDetails({
+        placeId: place.place_id;
+      }, function(place, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + 'Place ID: ' + place.place_id + '<br>' + place.formatted_address + '</div>');
+            infowindow.open(map, this);
+          });
+        }
+      });
 
       //set infowindow data
       var request = { placeId: place.place_id };
