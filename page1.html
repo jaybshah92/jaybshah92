@@ -257,8 +257,8 @@ if (navigator.geolocation) {
 
       //set infowindow data
       google.maps.event.addListener(markers, 'click', function() {
-        infowindow.setContent(place.name);
-        infowindow.open(map, this);
+        infowindow.setContent(place.name+"\n"+place.formatted_address+"\n"+place.formatted_phone_number+"\n"+place.period.open.time);
+        infowindow.open(map, markers);
       });
 
       //extending bounds for each marker seperately
