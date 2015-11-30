@@ -60,7 +60,7 @@
                 right: 0px;
                 background-color:#7f7f7f;
                 border:none;
-                /*padding: 5px 5px;*/
+                padding: 3px 3px;
                 float:right;
                 color:white;
                 z-index: 999;
@@ -117,13 +117,19 @@
           <div class="header">
             <a href="#menu"></a>
             Traveller's Guide
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="account" style="padding:3px"><i class="material-icons" style="font-size:25px">account_circle</i>
-<span class="caret"></span></button>
-<ul class="dropdown-menu dropdown-menu-right">
-<li><a href="#">My Account</a></li>
-<li><a href="#">Settings</a></li>
-<li><a href="#">Logout</a></li>
-</ul>
+           <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="account">Dropdown Example
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu dropdown-menu-right">
+      <li><a href="#">HTML</a></li>
+      <li><a href="#">CSS</a></li>
+      <li><a href="#">JavaScript</a></li>
+      <li class="divider"></li>
+      <li><a href="#">About Us</a></li>
+    </ul>
+  </div>
+</div>
+
         <nav id="menu">
         <ul>
           <li><a href="http://localhost/mainpage/mainpage.html">My Trails</a></li>
