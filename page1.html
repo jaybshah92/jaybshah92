@@ -266,7 +266,7 @@ if (navigator.geolocation) {
             position: place.geometry.location
           });
           google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent("<div><strong>"+place.name +"</strong><br>" + place.formatted_address +"<br>" + place.website + "<br>" + place.rating + "<br>" + place.formatted_phone_number+"</div>");
+            infowindow1.setContent("<div><strong>"+place.name +"</strong><br>" + place.formatted_address +"<br>" + place.website + "<br>" + place.rating + "<br>" + place.formatted_phone_number+"</div>");
             infowindow1.open(map, this);
            });
         }
