@@ -55,16 +55,27 @@
         font-weight: 300;
       }
       #account {
-                position:relative;
-                top: 0px;
-                right: 0px;
-                background-color:#7f7f7f;
-                border:none;
-                padding: 3px 3px;
-                float:right;
-                color:white;
-                z-index: 999;
-            }
+        position:relative;
+        top: 0px;
+        right: 0px;
+        background-color:#7f7f7f;
+        border:none;
+        padding: 3px 3px;
+        float:right;
+        color:white;
+        z-index: 999;
+      }
+      #account_dd {
+        position:relative;
+        top: 0px;
+        right: 0px;
+        background-color:#7f7f7f;
+        border:none;
+        padding: 3px 3px;
+        float:right;
+        color:white;
+        z-index: 999;
+      }
     </style>
     <style>
       #target {
@@ -118,12 +129,12 @@
             <a href="#menu"></a>
             Traveller's Guide
            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="account"><i class="material-icons" style="font-size:24px">account_circle</i>
-        <span class="caret"></span>
-        <ul class="dropdown-menu dropdown-menu-right">
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu dropdown-menu-right" id="account_dd">
         <li><a href="#">My Account</a></li>
         <li><a href="#">Settings</a></li>
         <li><a href="#">Logout</a></li>
-        </ul> </button>
+        </ul> 
 
         <nav id="menu">
         <ul>
