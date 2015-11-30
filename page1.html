@@ -260,6 +260,7 @@ if (navigator.geolocation) {
         infowindow.open(map, this);
       });
 
+      var destinations= [];
       //extending bounds for each marker seperately
       for(i=0;i<markers.length;i++) {
         bounds.extend(markers[i].getPosition());
