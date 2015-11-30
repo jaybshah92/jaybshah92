@@ -239,6 +239,7 @@ if (navigator.geolocation) {
 
     // For each place, get the icon, name and location.
     var str = null;
+    var destinations= [];
     places.forEach(function(place) {
       
       // Create a marker for each place.
@@ -260,7 +261,6 @@ if (navigator.geolocation) {
         infowindow.open(map, this);
       });
 
-      var destinations= [];
       //extending bounds for each marker seperately
       for(i=0;i<markers.length;i++) {
         bounds.extend(markers[i].getPosition());
