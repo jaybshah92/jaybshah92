@@ -171,6 +171,7 @@ function initAutocomplete() {
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
   var markers = [];
+  var temp = 1;
 
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -242,7 +243,6 @@ if (navigator.geolocation) {
     // For each place, get the icon, name and location.
     var str = null;
     var destinations= [];
-    var temp = 1;
     places.forEach(function(place) {
       
       // Create a marker for each place.
