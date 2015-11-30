@@ -267,7 +267,16 @@ if (navigator.geolocation) {
     });
     
     //stringyfy to proper JSON formaat
-    json = "["+str+"];";
+    var json = JSON.stringify(str);
+    var blob = new Blob([json], {type: "application/json"});
+    var url  = URL.createObjectURL(blob);
+
+    var a = document.createElement('a');
+    a.download    = "backup.json";
+    a.href        = url;
+    a.textContent = "Download backup.json";
+
+    document.getElementById('content').appendChild(a);
     
     //Fit bounds -- Resize map zoom to include all markers
     map.fitBounds(bounds);
