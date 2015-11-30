@@ -264,7 +264,7 @@ if (navigator.geolocation) {
       //extending bounds for each marker seperately
       for(i=0;i<markers.length;i++) {
         bounds.extend(markers[i].getPosition());
-        destinations.push(place.geometry.location);
+        destinations.push(new google.maps.LatLng place.geometry.location );
       }
       map.fitBounds(bounds);
     });
