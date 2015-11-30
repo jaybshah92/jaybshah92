@@ -250,7 +250,7 @@ if (navigator.geolocation) {
 
       //create json object for each marker
       if (str == null && place.name != "You are here!")
-        str = str +'{"title": "'+place.name+'","position": "'+place.geometry.location+'"}';  
+        str = '{"title": "'+place.name+'","position": "'+place.geometry.location+'"}';  
       else
         str = str +','+'{"title": "'+place.name+'","position": "'+place.geometry.location+'"}';
 
@@ -268,8 +268,7 @@ if (navigator.geolocation) {
     });
     
     //stringyfy to proper JSON formaat
-    var json = JSON.stringify(str);
-    var blob = new Blob([json], {type: "application/json"});
+    var blob = new Blob([str], {type: "application/json"});
     var url  = URL.createObjectURL(blob);
 
     var a = document.createElement('a');
