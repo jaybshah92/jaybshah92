@@ -261,7 +261,7 @@ if (navigator.geolocation) {
         placeId: place.place_id
       }, function(place, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
-          google.maps.event.addListener(marker, 'click', function() {
+          google.maps.event.addListener(markers, 'click', function() {
             infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + 'Place ID: ' + place.place_id + '<br>' + place.formatted_address + '</div>');
             infowindow.open(map, this);
           });
