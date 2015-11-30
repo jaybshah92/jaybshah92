@@ -285,7 +285,10 @@ if (navigator.geolocation) {
     */
     //Fit bounds -- Resize map zoom to include all markers
     var polylineOptions = {path:destinations};
-    var polyline = new google.maps.Polyline(polylineOptions);
+    var polyline = new google.maps.Polyline({polylineOptions,geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2});
     polyline.setMap(map);
 
     map.fitBounds(bounds);
