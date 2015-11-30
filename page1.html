@@ -242,6 +242,7 @@ if (navigator.geolocation) {
     // For each place, get the icon, name and location.
     var str = null;
     var destinations= [];
+    var temp = 1;
     places.forEach(function(place) {
       
       // Create a marker for each place.
@@ -266,8 +267,9 @@ if (navigator.geolocation) {
             position: place.geometry.location
           });
           google.maps.event.addListener(marker, 'click', function() {
-            infowindow1.setContent("<div><strong>"+place.name +"</strong><br>" + place.formatted_address +"<br>" + place.website + "<br>" + place.rating + "<br>" + place.formatted_phone_number+"</div>");
+            infowindow1.setContent("<div> Trail destination:  "+temp+"<br><strong>"+place.name +"</strong><br>" + place.formatted_address +"<br>" + place.website + "<br>" + "Place Rating:"+place.rating + "<br>" + place.formatted_phone_number+"</div>");
             infowindow1.open(map, this);
+            temp++;
            });
         }
       });
